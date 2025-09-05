@@ -1,0 +1,80 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "properties": {
+    "tasks": {
+      "type": "object",
+      "properties": {
+        "module": {
+          "type": "string"
+        },
+        "raw": {
+          "type": "object",
+          "properties": {
+            "source": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string"
+                },
+                "path_json_schema": {
+                  "type": "null"
+                },
+                "checkpoint_location": {
+                  "type": "string"
+                },
+                "storage_account_key": {
+                  "type": "string"
+                },
+                "storage_container": {
+                  "type": "string"
+                },
+                "folder": {
+                  "type": "string"
+                },
+                "load_path": {
+                  "type": "string"
+                },
+                "reader_options": {
+                  "type": "null"
+                },
+                "writer_options": {
+                  "type": "object",
+                  "properties": {
+                    "mergeSchema": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "mergeSchema"
+                  ]
+                }
+              },
+              "required": [
+                "checkpoint_location",
+                "folder",
+                "load_path",
+                "name",
+                "path_json_schema",
+                "reader_options",
+                "storage_account_key",
+                "storage_container",
+                "writer_options"
+              ]
+            }
+          },
+          "required": [
+            "source"
+          ]
+        }
+      },
+      "required": [
+        "module",
+        "raw"
+      ]
+    }
+  },
+  "required": [
+    "tasks"
+  ]
+}

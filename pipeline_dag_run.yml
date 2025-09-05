@@ -1,0 +1,57 @@
+---
+tasks:
+  module: app.load.schemas
+  raw:
+    source:
+      name: dag_runs
+      path_json_schema: null
+      checkpoint_location: /tmp/datalake/checkpoint_location/dag_runs
+      storage_account_key: sdi-datalake
+      storage_container: airflow-landing
+      folder: dag_runs
+      load_path: dag_runs
+      reader_options: null
+      writer_options:
+        mergeSchema: "true"
+    target:
+      fqn: null
+      table_description: |
+        The "airflow_dag_runs_raw" table contains raw data related to the execution and scheduling of Directed Acyclic Graphs (DAGs) in the Airflow system. It captures information such as DAG IDs, run IDs, execution dates, start and end dates, and the state of each DAG run.
+      uc_table_name: airflow_dag_run_raw
+      uc_catalog: sdi_raw
+      uc_schema: sdi_artifacts
+      sort_columns: ["_metadata_extraction_datetime"]
+      partition_columns: []
+      path_json_schema: null
+      delta_properties:
+        delta.logRetentionDuration: "1 day"
+        delta.deletedFileRetentionDuration: "1 day"
+    meta_config:
+      extraction_column: _metadata_ingestion_datetime
+      ignore_columns: []
+      ingestion_column_regex: \d{8}T\d{6}
+      ingestion_date_format: yyyyMMdd'T'HHmmss
+
+  latest:
+    source:
+      fqn: null
+      uc_table_name: airflow_dag_run_raw
+      uc_schema: sdi_artifacts
+      uc_catalog: sdi_raw
+    target:
+      fqn: null
+      table_description: |
+        The 'airflow_dag_runs' table contains essential information about the execution and scheduling of Directed Acyclic Graphs (DAGs) within the Airflow system. It tracks the start and end dates of data intervals, execution dates, run types, states of DAG runs, and any notes associated with them.
+      uc_table_name: airflow_dag_run
+      uc_schema: sdi_artifacts
+      uc_catalog: sdi_cleansed
+      path_json_schema: cleansed/dag_runs.json
+      primary_key: ["dag_id", "dag_run_id", "start_date", "execution_date"]
+      surrogate_key: null
+      sort_columns: ["dag_id", "dag_run_id", "start_date", "execution_date"]
+      partition_columns: null
+      is_full_load: false
+      delta_properties:
+        delta.logRetentionDuration: "1 days"
+        delta.deletedFileRetentionDuration: "1 days"
+      timeline_column: _metadata_extraction_datetime

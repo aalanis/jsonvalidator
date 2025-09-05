@@ -1,0 +1,14 @@
+tasks:
+  module: app.load.schemas
+  raw:
+    source:
+      name: dag_runs
+      path_json_schema: null
+      checkpoint_location: /tmp/datalake/checkpoint_location/dag_runs
+      storage_account_key: sdi-datalake
+      storage_container: airflow-landing
+      folder: dag_runs
+      load_path: dag_runs
+      reader_options: null
+      writer_options:
+        mergeSchema: "true"
