@@ -11,4 +11,5 @@ tasks:
       load_path: dag_runs
       reader_options: null
       writer_options:
+        new_option: blabla
         mergeSchema: "true"

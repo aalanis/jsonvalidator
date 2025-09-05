@@ -1,6 +1,5 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "additionalProperties": false,
   "type": "object",
   "properties": {
     "tasks": {
@@ -14,7 +13,6 @@
           "properties": {
             "source": {
               "type": "object",
-              "additionalProperties": false,
               "properties": {
                 "name": {
                   "type": "string"
@@ -42,7 +40,6 @@
                 },
                 "writer_options": {
                   "type": "object",
-                  "additionalProperties": false,
                   "properties": {
                     "mergeSchema": {
                       "type": "string"
